@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="StorefrontRetail.Views.Home.HomePage"
+                  xmlns:viewModel="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail"
+                  xmlns:model="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail"
+                  Title="Home"
+                  BindingContext="{Binding this}"
+                  >
+    <MasterDetailPage.Master>
+        <ContentPage xmlns:local="clr-namespace:StorefrontRetail.Views.Home;assembly=StorefrontRetail"
+                     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                     ios:Page.UseSafeArea="true"
+                     IconImageSource="hamburger_menu.png"
+                     Title="BROWSE CATEGORIES">
+            <StackLayout>
+                <SearchBar Placeholder="Search products" />
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton
+                        Source="back_icon.png" 
+                        x:Name="BtnGoBack"  
+                        BackgroundColor="Transparent"
+                        HeightRequest="24"
+                    />
+
+                    <Label
+                        Text="BROWSE CATEGORIES"
+                        HorizontalOptions="CenterAndExpand"
+                        />
+                   
+                </StackLayout>
+                <ListView
+                    x:DataType="viewModel:HomePageViewModel"
+                    x:Name="ListViewProductMenu"
+                    ItemsSource="{Binding ProductMenus}"
+                    SelectedItem="{Binding SelectedMenu, Mode=TwoWay}"
+                    >
+                    <ListView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="model:ProductMenu">
+                            <ViewCell>
+                                <Grid
+                                    VerticalOptions="Center"
+                                    Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        TextColor="{StaticResource ColorSecondary}"
+                                        Text="{Binding Name}"
+                                        Grid.Column="0" />
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalOptions="End">
+                                        <Label
+                                            FontSize="Small"
+                                            TextColor="{StaticResource ColorSecondary}"
+                                            HorizontalTextAlignment="End"
+                                            Text="{Binding Count}" />
+                                        <Image
+                                            Source="more_icon.png"
+                                            Opacity="{Binding HasChildrenItems }" />
+                                    </StackLayout>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <ContentPage/>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

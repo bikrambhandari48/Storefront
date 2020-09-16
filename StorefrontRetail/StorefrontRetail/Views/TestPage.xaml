@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail"
+             xmlns:models="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail"
+             x:Class="StorefrontRetail.Views.TestPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button 
+                Text="Add new menu"
+                Command="{Binding AddNewMenuCommand}"
+                />
+            <ListView
+                    x:DataType="viewModels:TestPageViewModel"
+                    x:Name="ListViewProductMenu"
+                    ItemsSource="{Binding ProductMenus}"
+                    >
+                <ListView.ItemTemplate>
+                    <DataTemplate
+                            x:DataType="models:ProductMenu">
+                        <ViewCell>
+                            <Grid
+                                    VerticalOptions="Center"
+                                    Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                        TextColor="{StaticResource ColorSecondary}"
+                                        Text="{Binding Name}"
+                                        Grid.Column="0" />
+                                <StackLayout
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalOptions="End">
+                                    <Label
+                                            FontSize="Small"
+                                            TextColor="{StaticResource ColorSecondary}"
+                                            HorizontalTextAlignment="End"
+                                            Text="{Binding Count}" />
+                                    <Image
+                                            Source="more_icon.png"
+                                            Opacity="{Binding HasChildrenItems }" />
+                                </StackLayout>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

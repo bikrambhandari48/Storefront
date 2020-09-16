@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorefrontRetail.Views.Cart.CartPage"
+             xmlns:templates="clr-namespace:StorefrontRetail.Views.Templates;assembly=StorefrontRetail"
+             xmlns:viewModels="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail"
+             Title="Cart"
+             x:Name="Cart">
+    <Grid
+        x:DataType="viewModels:CartPageViewModel">
+        <!-- SHOPPING CART -->
+        <Grid
+            IsVisible="{Binding CartItem.Products.Count, Converter={StaticResource CountToBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- CART ITEMS -->
+            <Grid
+                Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ScrollView
+                        Grid.Row="0">
+                        <!-- ITEMS -->
+                        <ListView
+                            ItemsSource="{Binding CartItem.Products}"
+                            HasUnevenRows="True"
+                            SeparatorVisibility="None"
+                            VerticalOptions="FillAndExpand"
+                            CachingStrategy="RecycleElement">
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <templates:CartItemTemplate
+                                            RemoveItemCommand="{Binding BindingContext.RemoveCartItemCommand, Source={x:Reference Cart}}"
+                                            UpdateCartCommandParameter="{Binding .}"
+                                            AddCommentCommand="{Binding BindingContext.AddCommentCommand, Source={x:Reference Cart}}"
+                                            UpdateCartCommand="{Binding BindingContext.UpdateCartCommand, Source={x:Reference Cart}}"
+                                            />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </ScrollView>
+                </Grid>
+            </Grid>
+            <!-- CHECKOUT -->
+            <Grid
+                Grid.Row="1"
+                Padding="0"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="10">
+                <StackLayout>
+                    <!-- TOTAL EXC. GST -->
+                    <StackLayout Orientation="Horizontal" Padding="4">
+                        <Label
+                            Text="Total Exc. GST :" 
+                            HorizontalOptions="Start"
+                        />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding CartItem.TotalExcGst, StringFormat='${0:N}'}" />
+                    </StackLayout>
+                    <!-- TOTAL GST -->
+                    <StackLayout Orientation="Horizontal" Padding="4">
+                        <Label
+                            Text="Total GST :" 
+                            HorizontalOptions="Start"
+                        />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding CartItem.CartTotalTax, StringFormat='${0:N}'}" />
+                    </StackLayout>
+                    <!-- TOTAL -->
+                    <StackLayout Orientation="Horizontal" Padding="4">
+                        <Label
+                            Text="Total :" 
+                            HorizontalOptions="Start"
+                            />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding CartItem.CartTotal, StringFormat='${0:N}'}" />
+                    </StackLayout>
+                    <Button
+                        Text="Proceed to checkout"
+                        Style="{StaticResource PrimaryButton}"
+                        Command="{Binding ProceedToCheckoutPageCommand}"
+                        />
+
+                </StackLayout>
+
+            </Grid>
+        </Grid>
+        <!-- EMPTY SHOPPING CART -->
+        <Grid
+            IsVisible="{Binding CartItem.Products.Count, Converter={StaticResource InverseCountToBoolConverter}}">
+            <Label
+                Text="EMPTY SHOPPING CART"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

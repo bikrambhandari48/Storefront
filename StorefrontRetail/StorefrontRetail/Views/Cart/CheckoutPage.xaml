@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorefrontRetail.Views.Cart.CheckoutPage"
+             Title="Checkout"
+             xmlns:checkoutPageViewModel="clr-namespace:StorefrontRetail.ViewModels.Checkout;assembly=StorefrontRetail">
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout 
+                Margin="8"
+                x:DataType="checkoutPageViewModel:CheckoutPageViewModel">
+                <Label
+                    Text="Billing Address"
+                    Padding="8"
+                    BackgroundColor="{StaticResource ColorPrimary}"
+                    TextColor="White" />
+
+                <Entry
+                    Placeholder="Street address *" />
+                <Entry
+                    Placeholder="Street address 2" />
+                <Entry
+                    Placeholder="Postcode *" />
+
+                <Entry
+                    Placeholder="City *" />
+                <Entry
+                    Placeholder="State *" />
+
+                <Entry
+                    Placeholder="Delivery instruction 1" />
+
+                <Entry
+                    Placeholder="Delivery instruction 2" />
+
+
+                <Label
+                    Text="Billing Address"
+                    Padding="8"
+                    BackgroundColor="{StaticResource ColorPrimary}"
+                    TextColor="White" />
+
+                <Entry
+                    Placeholder="Street address *" />
+                <Entry
+                    Placeholder="Street address 2" />
+                <Entry
+                    Placeholder="Postcode *" />
+
+                <Entry
+                    Placeholder="City *" />
+                <Entry
+                    Placeholder="State *" />
+
+                <Entry
+                    Placeholder="Delivery instruction 1" />
+
+                <Entry
+                    Placeholder="Delivery instruction 2" />
+
+                <Button 
+                    Text="Proceed to payment" 
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding ProceedToPaymentPageCommand}"
+                />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="StorefrontRetail.Views.RegisterPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:viewModels="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail">
+    <ContentPage.Content>
+        <RelativeLayout
+            x:DataType="viewModels:RegisterPageViewModel">
+            <StackLayout
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                Padding="0,0,0,20"
+                x:Name="LogoContainer">
+                <StackLayout HorizontalOptions="Start">
+                     
+                    <ImageButton
+                        Margin="10, 10, 0, 0"
+                        Source="close_icon.png"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Command="{Binding DismissRegisterPageCommand}" />
+                    
+                </StackLayout>
+                <Image HorizontalOptions="Center"
+                       Source="logo.png" />
+                <Label
+                    FontSize="Title"
+                    Style="{StaticResource SecondaryLabel}"
+                    HorizontalTextAlignment="Center"
+                    Text="Create A New Account" />
+            </StackLayout>
+            <ScrollView
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Width}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LogoContainer, Property=Height } "
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Factor=0.7, Property=Height}"
+                Padding="10"
+                VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="First Name *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter first name" />
+
+                    <Label Text="Middle Name"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter middle name" />
+
+                    <Label Text="Last Name *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter last name" />
+
+                    <Label Text="Phone Number *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry Keyboard="Numeric"
+                           Placeholder="Enter phone number" />
+
+                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" />
+
+                    <Label Text="Street Address *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter street address" />
+
+                    <Label Text="Street address 2"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter street address 2 (Optional)" />
+
+                    <Label Text="Suburb *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter suburb" />
+
+                    <Label Text="Post Code *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry
+                        Placeholder="Enter post code" />
+
+                    <Label Text="State *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Picker />
+
+                    <Label Text="Email *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry Keyboard="Email"
+                           Placeholder="Enter valid email" />
+
+                    <Label Text="Password *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry Keyboard="Email"
+                           Placeholder="Enter a secure password" />
+
+                    <Label Text="Conform Password *"
+                           Style="{StaticResource SecondaryLabel}"
+                           FontSize="Small" />
+                    <Entry Keyboard="Email"
+                           Placeholder="Confirm password" />
+
+                    <Button Style="{StaticResource PrimaryButton}"
+                            Text="Create New Account"
+                            Command="{Binding DismissRegisterPageCommand}"/>
+
+                     
+
+                </StackLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

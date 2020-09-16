@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorefrontRetail.Views.Account.AccountPage"
+             xmlns:accountPageViewModel="clr-namespace:StorefrontRetail.ViewModels.Account;assembly=StorefrontRetail"
+             xmlns:models="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail">
+    <ContentPage.Content>
+        <StackLayout
+            x:DataType="accountPageViewModel:AccountPageViewModel">
+            <ListView
+                ItemsSource="{Binding AccountSettings}"
+                IsVisible="{Binding IsUserLoggedIn}"
+            >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AccountSetting">
+                        <ViewCell>
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Label
+                                    Text="{Binding Name}" 
+                                    IsVisible="{Binding Visible}"
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="CenterAndExpand"
+                                    />
+                                
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout
+                VerticalOptions="CenterAndExpand">
+                <Label 
+                    Text="You are logged out. Login to add items to cart."
+                    HorizontalTextAlignment="Center"
+                    />
+                <Button 
+                    Text="Go To Login Page"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding GoToLoginPageCommand}"
+                    Margin="8"
+                    />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

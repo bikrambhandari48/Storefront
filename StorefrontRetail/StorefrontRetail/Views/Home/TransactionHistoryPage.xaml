@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorefrontRetail.Views.Home.TransactionHistoryPage"
+             xmlns:models="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:models1="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail"
+             ios:Page.UseSafeArea="True"
+>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Close"
+            Clicked="BtnClose_OnClicked"
+        />
+    </ContentPage.ToolbarItems>
+   
+    <ContentPage.Content>
+        <Grid
+            x:DataType="models:TransactionHistory"
+            Padding="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Tran Number"
+                   x:Name="LabelTranNumber"
+                   
+                   TextColor="Gray"
+                   FontAttributes="Bold"
+                   IsVisible="{Binding ShowTransactionNumberColumn}" />
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="Description"
+                   x:Name="LabelDescription"
+                   
+                   TextColor="Gray"
+                   FontAttributes="Bold"
+                   IsVisible="{Binding ShowDescriptionColumn}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                Text="Quantity"
+                x:Name="LabelQuantity"
+                
+                TextColor="Gray"
+                FontAttributes="Bold"
+                IsVisible="{Binding ShowQuantityColumn}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="3"
+                Text="Date"
+                x:Name="LabelDate"
+                
+                TextColor="Gray"
+                FontAttributes="Bold"
+                IsVisible="{Binding ShowDateRaisedColumn}" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="4"
+                Text="Extension"
+                x:Name="LabelExtension"
+                
+                TextColor="Gray"
+                FontAttributes="Bold"
+                IsVisible="{Binding ShowExtensionColumn}" />
+            <ListView
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="5"
+                x:Name="ListViewTransactionHistory"
+                HasUnevenRows="True"
+                ItemsSource="{Binding TransactionHistories}"
+                >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:History">
+                        <ViewCell>
+                            <Grid
+                                Padding="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    
+                                    TextColor="Gray"
+                                    Text="{Binding TransactionNumber}"
+                                    IsVisible="{Binding Source={x:Reference LabelTranNumber }, Path=IsVisible}"
+                                    />
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       
+                                       TextColor="Gray"
+                                       Text="{Binding Description}"
+                                       IsVisible="{Binding Source={x:Reference LabelDescription}, Path=IsVisible}"/>
+                                <Label
+                                    
+                                    TextColor="Gray"
+                                    Grid.Column="2"
+                                    Text="{Binding Quantity}"
+                                    IsVisible="{Binding Source={x:Reference LabelQuantity }, Path=IsVisible}"/>
+                                <Label
+                                    
+                                    TextColor="Gray"
+                                    Grid.Column="3"
+                                    Text="{Binding DateRaised}"
+                                    IsVisible="{Binding Source={x:Reference LabelDate }, Path=IsVisible}"
+                                    />
+                                <Label
+                                    
+                                    TextColor="Gray"
+                                    Grid.Column="4"
+                                    Text="{Binding FormattedExtension}" 
+                                    IsVisible="{Binding Source={x:Reference LabelExtension }, Path=IsVisible}"
+                                    />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

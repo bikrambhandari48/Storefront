@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorefrontRetail.Views.Templates.CartItemTemplate"
+             x:Name="This">
+    <ContentView.Content>
+        <Grid
+         BindingContext="{x:Reference This}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <!-- IMAGE -->
+            <Image
+                Grid.Column="0"
+                Grid.Row="0"
+                Source="{Binding Picture1}"
+                HeightRequest="50"
+                Aspect="AspectFit"
+                VerticalOptions="Center"
+                Margin="12,0,0,0" />
+            <Grid
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="6, 6, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- NAME -->
+                <Label
+                    Grid.Row="0"
+                    Text="{Binding Brand}" />
+
+                <Label
+                    Grid.Row="1"
+                    Text="{Binding Description}"
+                    FontSize="12" />
+                <Grid
+                    Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- PRICE label -->
+                    <StackLayout
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalOptions="FillAndExpand">
+                        <Label
+                            Text="Price:" />
+                        <Label
+                            Text="{Binding Price, StringFormat='${0:N}'}" />
+                        <Label
+                            Text="for" />
+                        <Label
+                            Text="{Binding Quantity}" />
+
+                        <Label
+                            Text="{Binding Units}" />
+                    </StackLayout>
+                    <!-- Quantity update button container -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Entry
+                            Text="{Binding Quantity}"
+                            Placeholder="Quantity" />
+                        <Label
+                            Text="{Binding Units}"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Text="Update cart"
+                            TextDecorations="Underline"
+                            Margin="8, 0, 0, 0"
+                            FontSize="12"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding UpdateCartCommand}"
+                                    CommandParameter="{Binding UpdateCartCommandParameter}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <!-- Remove and Add Comment Button Container -->
+                    <StackLayout
+                        Grid.Row="2"
+                        Orientation="Horizontal">
+                        <Label
+                            Text="Remove"
+                            TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RemoveItemCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label
+                            Text="Add Comment"
+                            Margin="8 ,0, 0, 0"
+                            TextDecorations="Underline" 
+                            >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddCommentCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+                </Grid>
+            </Grid>
+            <BoxView Grid.Column="0"
+                     Grid.Row="2"
+                     Grid.ColumnSpan="2"
+                     Color="{StaticResource ColorSecondary}"
+                     HorizontalOptions="FillAndExpand"
+                     HeightRequest="0.5" />
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="StorefrontRetail.Views.Authentication.LoginPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="False"
+             xmlns:viewModels="clr-namespace:StorefrontRetail.ViewModels">
+    <ContentPage.Content>
+
+        <RelativeLayout>
+
+            <!-- <Image -->
+            <!--     Aspect="AspectFill" -->
+            <!--     Source="background.jpg" -->
+            <!--     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" -->
+            <!--     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" /> -->
+
+
+            <StackLayout
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                Padding="0,50,0,50"
+                x:Name="LogoContainer"
+                VerticalOptions="Center">
+                <Image
+                    Source="logo.png" />
+                <Label
+                    FontSize="Title"
+                    TextColor="{StaticResource ColorSecondary}"
+                    HorizontalTextAlignment="Center"
+                    Text="Enter your credentials to login" />
+            </StackLayout>
+            <StackLayout
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=1, Property=Width}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LogoContainer, Property=Height } "
+                VerticalOptions="Center"
+                Padding="10"
+                x:DataType="viewModels:LoginPageViewModel">
+
+                <Label
+                    Text="Email" 
+                    TextColor="{StaticResource ColorSecondary}"
+                     />
+                <Entry
+                    Text="{Binding Email}"
+                    Placeholder="example@example.com" />
+
+                <Label
+                    Margin="0,10,0,0"
+                    TextColor="{StaticResource ColorSecondary}"
+                    Text="Password" />
+                <Entry
+                    IsPassword="True"
+                    Text="{Binding Password}"
+                    Placeholder="Enter your secure password" />
+                <Label
+                    Margin="0, 10, 0, 0"
+                    Text="Forgot Your Password?"
+                    TextDecorations="Underline"
+                    TextColor="{StaticResource ColorSecondary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button
+                    Margin="0,20,0,0"
+                    Text="Log In"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding LoginCommand}" />
+                <Button
+                    Margin="0,20,0,0"
+                    Text="Create An Account"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource ColorSecondary}"
+                    Style="{StaticResource SecondaryButton}"
+                    Command="{Binding CreateAccountCommand}"/>
+            </StackLayout>
+        </RelativeLayout>
+
+    </ContentPage.Content>
+</ContentPage>

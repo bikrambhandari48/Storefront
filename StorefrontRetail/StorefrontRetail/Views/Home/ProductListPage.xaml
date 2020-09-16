@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:StorefrontRetail.Models;assembly=StorefrontRetail"
+             xmlns:viewModal="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail"
+             x:Class="StorefrontRetail.Views.Home.ProductListPage">
+    <ContentPage.Content
+        >
+        <CollectionView
+            x:DataType="viewModal:ProductListPageViewModel"
+            x:Name="ProductsCollectionView"
+            SelectionMode="Single"
+            SelectionChanged="ProductsCollectionView_OnSelectionChanged"
+            ItemsSource="{Binding Products }"
+            
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Product">
+                    <StackLayout>
+                        <StackLayout Padding="10" x:DataType="models:Product" Orientation="Horizontal">
+
+                            <StackLayout>
+                                <Label />
+                                <Image Source="test_image_14.jpg" HeightRequest="50" Aspect="AspectFit" />
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+
+                                    <Label
+                                        Text="{Binding Brand}"
+                                        TextColor="{StaticResource ColorSecondary}"
+                                        LineBreakMode="WordWrap"
+                                        FontSize="Small" />
+
+                                    <Frame
+                                        Style="{StaticResource PrimaryBadgeFrame}"
+                                        IsVisible="{Binding ShowStockAvailableLabel}">
+
+                                        <Label
+                                            Text="{Binding FormattedAvailableQuantity }"
+                                            Style="{StaticResource Badge}" />
+
+                                    </Frame>
+                                    <Frame
+                                        Style="{StaticResource DangerBadgeFrame}"
+                                        IsVisible="{Binding DisplayOutOfStockMessage}">
+                                        <Label
+                                            Text="Out of stock"
+                                            Style="{StaticResource Badge}" />
+                                    </Frame>
+
+                                    <Frame
+                                        Style="{StaticResource PrimaryBadgeFrame}"
+                                        IsVisible="{Binding DisplayNextEtaDate}">
+                                        <Label
+                                            Text="{Binding NextAvailablePurchaseDate}"
+                                            Style="{StaticResource Badge}" />
+
+                                    </Frame>
+
+                                </StackLayout>
+                                <Label
+                                    Text="{Binding Description}"
+                                    TextColor="{StaticResource ColorSecondary}"
+                                    LineBreakMode="WordWrap"
+                                    FontSize="Medium" />
+
+                                <Label
+                                    Text="The actual weight may differ slightly, and that will affect the price you pay"
+                                    FontSize="Small"
+                                    TextColor="{StaticResource ColorSecondary}"
+                                    IsVisible="{Binding IsWeightSensitive}" />
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    
+                                    VerticalOptions="Center"
+                                    IsVisible="{Binding ShowAddToCartBtn}">
+                                    <Entry
+                                        Placeholder="Quantity"
+                                        Keyboard="Numeric"
+                                        Text="1"
+                                        HorizontalOptions="FillAndExpand" />
+                                    <Label
+                                        Text="{Binding Units}"
+                                        VerticalOptions="Center"
+                                        IsVisible="{Binding ShowBaseUnit}" />
+                                    <Picker
+                                        Title="{Binding DefaultSelectedUnit}"
+                                        ItemsSource="{Binding AlternateUnitOptions}"
+                                        SelectedItem="{Binding SelectedItem }"
+                                        IsVisible="{Binding ShowAlternateUnit }"
+                                        ItemDisplayBinding="{Binding Text}" />
+                                    <Button
+                                        Style="{StaticResource PrimaryButton}"
+                                        HeightRequest="20"
+                                        Text="{Binding FormattedPrice}"
+                                        HorizontalOptions="FillAndExpand"
+                                    />
+
+                                    <Button
+                                        x:Name="BtnHistory"
+                                        Style="{StaticResource PrimaryButton}"
+                                        Text="History"
+                                        Clicked="BtnHistory_OnClicked"
+                                        IsVisible="{Binding ShowProductHistory}"
+                                        HorizontalOptions="FillAndExpand" />
+
+                                </StackLayout>
+
+                                <Label
+                                    Style="{StaticResource SecondaryLabel}"
+                                    FontSize="8"
+                                    Text="Note: Tax will be added at checkout."
+                                    IsVisible="{Binding ShouldShowTaxInformation}" />
+                            </StackLayout>
+
+
+                        </StackLayout>
+                        <BoxView
+                            Color="{StaticResource ColorSecondary}"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="0.5" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

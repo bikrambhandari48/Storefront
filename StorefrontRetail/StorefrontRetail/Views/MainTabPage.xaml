@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StorefrontRetail.Views.MainTabPage"
+    xmlns:local="clr-namespace:StorefrontRetail.Views;assembly=StorefrontRetail"
+    xmlns:home="clr-namespace:StorefrontRetail.Views.Home;assembly=StorefrontRetail"
+    xmlns:cart="clr-namespace:StorefrontRetail.Views.Cart;assembly=StorefrontRetail"
+    xmlns:account="clr-namespace:StorefrontRetail.Views.Account;assembly=StorefrontRetail"
+    xmlns:viewModel="clr-namespace:StorefrontRetail.ViewModels;assembly=StorefrontRetail"
+    x:DataType="viewModel:MainTabPageViewModel"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom">
+
+    <TabbedPage.Children>
+        <local:TestPage
+            Title="Test"
+            BindingContext="{Binding TestPageViewModel }" />
+        <home:HomePage
+            IconImageSource="tab_home.png"
+            Title="Home"
+            BindingContext="{Binding HomePageViewModel }" />
+        <NavigationPage Title="Cart" IconImageSource="tab_cart.png">
+            <x:Arguments>
+                <cart:CartPage
+                    IconImageSource="tab_cart.png"
+                    Title="Cart"
+                    BindingContext="{Binding CartPageViewModel }" />
+            </x:Arguments>
+        </NavigationPage>
+
+
+        <NavigationPage Title="Account" IconImageSource="tab_account.png">
+            <x:Arguments>
+                <account:AccountPage
+                    IconImageSource="tab_account.png"
+                    Title="Account"
+                    BindingContext="{Binding AccountPageViewModel }" />
+            </x:Arguments>
+        </NavigationPage>
+
+        
+
+    </TabbedPage.Children>
+
+    <!--Pages can be added as references or inline-->
+    <!-- <local:HomePage -->
+    <!--     IconImageSource="tab_home.png" -->
+    <!--     Title="Home" -->
+    <!--      /> -->
+    <!-- <ContentPage -->
+    <!--     Title="Cart" -->
+    <!--     IconImageSource="tab_cart.png" /> -->
+    <!-- <ContentPage -->
+    <!--     Title="Account" -->
+    <!--     IconImageSource="tab_account.png" /> -->
+</TabbedPage>
